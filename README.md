@@ -83,6 +83,13 @@ management:
       percentiles-histogram:
         "[http.server.requests]": true
 ```
+Or `.properties`:
+```properties
+management.endpoints.web.exposure.include=health,prometheus
+metrics.export.prometheus.enabled=true
+metrics.distribution.percentiles-histogram.[http.server.requests]=true
+```
+
 I opened two endpoints `health` and `prometheus`, moreover enabled metrics collection for prometheus and `distribution.percentiles-histogram.http.server.requests` will watch for endpoint performance and response codes. Also micrometer by default shows jvm metrics, so if we now launch application at `http://localhost:8080/actuator/prometheus` we will see jvm metrics and request ditribution (It will be printed after first api request).
 ```
 jvm_memory_used_bytes{area="nonheap",id="Compressed Class Space",} 5166496.0
